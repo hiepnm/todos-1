@@ -43,3 +43,14 @@ const combineReducers = (reducers) => {
 		);
 	}
 }
+
+2, throttle in lodash
+- Wrapping my call back in a throttle call insures that the inner function that I pass is not going to be called more often than the number of milliseconds I specify.
+import {thottle} from 'lodash';
+thottle(callback, x);
+- dam bao rang chi goi callback 1 lan trong vong x milliseconds (tinh tu lan goi gan nhat).
+
+3, import note
+su dung.
+import throttle from 'lodash/thottle';
+- nguyen nhan khong dung import {throttle} from 'lodash'; => import kieu nay se import toan bo lodash vao => lam cho build bi phinh to, trong khi chi dung co 1 ham throttle.
