@@ -12,6 +12,29 @@ Supplying the Initial State
 		With keys that don't appear in persistentState (ex: visibilityFilter in tutorial), It take the default value specified by the reducer. (reducer take control)
 	- You might get tempted to specify all the initial state tree of your app in a single place and pass it to createStore, but we don't recommend this. Co-locating the initial state with the reducer definition makes it easy to test and change, so you should always strive to do that.
 
+React Router
+1. Adding
+- npm install --save react-router => sau khi import, code => bi loi: Cannot read property 'getCurrentLocation' of undefined in Router.js file.
+=> fix:
+	npm install --save react-router@2.8.1
+- sau do code:
+Router component
+Route configuration component
+import { Router, Route } from 'react-router';
+import App from './App';
+
+const Root = ({ store }) => (
+  <Provider store={store}>
+    <Router>
+			<Route path='/' component={App}/>
+    </Router>
+  </Provider>
+);
+
+=> thi bi bao warning. va thay cac ky tu ki di sau dau thang tren address bar.
+	doc trong tut:
+		it means that you're using the version of React Router that doesn't yet default to the browserHistory, and defaults to hash history instead.
+		To fix it, you can import browserHistory from React Router and pass it as a history prop to Router. 
 
 OUTSIDE
 Implementation of createStore and combineReducers
