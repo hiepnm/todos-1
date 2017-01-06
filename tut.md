@@ -42,6 +42,7 @@ import {Link} from 'react-router';
 >
 	{children}
 </Link>
+using withRouter function supplied by react-router to read the params.
 note:
 	parenthesis to tell react-router that it's optional, because if it's not specified, I want to show all todos.
 
