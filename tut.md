@@ -30,6 +30,19 @@ const Root = ({ store }) => (
     </Router>
   </Provider>
 );
+2. Navigating with <Link>
+import {Link} from 'react-router';
+<Link
+	to={set the path to string, using prop here to compare} eg: to={filter==="all" ? "" : filter}
+	activeStyle={{
+		textDecoration: 'none',
+		color: 'black',
+	}}
+>
+	{children}
+</Link>
+note:
+	parenthesis to tell react-router that it's optional, because if it's not specified, I want to show all todos.
 
 => thi bi bao warning. va thay cac ky tu ki di sau dau thang tren address bar.
 	doc trong tut:
