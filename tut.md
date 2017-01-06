@@ -31,6 +31,7 @@ const Root = ({ store }) => (
   </Provider>
 );
 2. Navigating with <Link>
+- Adding parameter to Router path is very important. => It will pass params to child component.
 import {Link} from 'react-router';
 <Link
 	to={set the path to string, using prop here to compare} eg: to={filter==="all" ? "" : filter}
