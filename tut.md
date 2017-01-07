@@ -42,7 +42,9 @@ import {Link} from 'react-router';
 >
 	{children}
 </Link>
-using withRouter function supplied by react-router to read the params.
+
+
+3. using withRouter function supplied by react-router to read the params.
 note:
 	parenthesis to tell react-router that it's optional, because if it's not specified, I want to show all todos.
 
@@ -50,7 +52,10 @@ note:
 	doc trong tut:
 		it means that you're using the version of React Router that doesn't yet default to the browserHistory, and defaults to hash history instead.
 		To fix it, you can import browserHistory from React Router and pass it as a history prop to Router. 
-
+4. Shorthand notation of mapDispatchToProps().
+	- When the arguments for the callback prop match the arguments to the action creator exactly, there is a shorter way to specify mapDispatchToProps.
+		{callback: actionCreator}
+	- It is very common that the arguments passed through the callback props are passed through to the action creators in the same order.
 OUTSIDE
 Implementation of createStore and combineReducers
 const createStore = (reducer, persistentState) => {
