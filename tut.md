@@ -56,6 +56,16 @@ note:
 	- When the arguments for the callback prop match the arguments to the action creator exactly, there is a shorter way to specify mapDispatchToProps.
 		{callback: actionCreator}
 	- It is very common that the arguments passed through the callback props are passed through to the action creators in the same order.
+
+5. Colocating Selectors with Reducers
+	- My mapStateToProps function uses the getVisibleTodos function, and it passes the slice of the state corresponding to the todos. However, if I ever change the state structure, I'll have to remember to update this whole side.
+	- Move the getVisibleTodos function out of my view layer and place it in the file (reducer file) that knows best about the state.todos internal structure.
+	- The convention: 
+		+ The default export is always the reducer function
+		+ Any named export starting with get is a function that prepares the data to be displayed by the UI.
+		+ => call selector, because they select something from the current state.
+	- export again selector on root reducer.
+		+ using the namespace import syntax to avoid the same name in the scope.
 OUTSIDE
 Implementation of createStore and combineReducers
 const createStore = (reducer, persistentState) => {
