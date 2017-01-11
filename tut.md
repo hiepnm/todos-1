@@ -208,5 +208,32 @@ We will learn about fake backend module that we will be using throughout the nex
 	- See src/api/index.js
 	- This approach lets us explore how Redux works with asynchronous data fetching without writing a real backend for the app.
 
+14. Fetching Data on Route Change
+We will learn how to fire up an async request when the route changes.
+I want to fetch the todos inside my component. The component that displays and selects the todos is the VisibleTodoList. 
+A good place to call the API would be inside componentedDidMount life cycle hook.
+see VisibleTodoList to know how to wrap Component, and define lifecycle hook like componentDidMount, componentDidUpdate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
