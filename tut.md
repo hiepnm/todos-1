@@ -214,7 +214,11 @@ I want to fetch the todos inside my component. The component that displays and s
 A good place to call the API would be inside componentedDidMount life cycle hook.
 see VisibleTodoList to know how to wrap Component, and define lifecycle hook like componentDidMount, componentDidUpdate.
 
-
+15. Dispatching Actions with the Fetched Data
+We will learn how to dispatch a Redux action after the data has been fetched and recap how to do it when the route changes.
+We want the fetched todos to become a part of the Redux Store state. The only way to get something into the state is to dispatch an action.
+I'm going to call the callback prop called receiveTodos, whether to todos I just fetched.
+To make it available inside the component, I need to pass a function called receiveTodos that would be an action creator inside the second argument of connect function.
 
 
 
