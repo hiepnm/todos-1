@@ -107,3 +107,72 @@ thottle(callback, x);
 su dung.
 import throttle from 'lodash/thottle';
 - nguyen nhan khong dung import {throttle} from 'lodash'; => import kieu nay se import toan bo lodash vao => lam cho build bi phinh to, trong khi chi dung co 1 ham throttle.
+
+
+
+Review Build ReactApp with Redux.
+1. Using Arrow Function:
+	- Using Arrow Function voi cac function nam ngoai.
+		const function_name = (params) => {
+
+		}
+	- Su dung ES6 function, voi cac function nam trong. vi du nam trong mapDispatchToProps
+		{
+			...
+			function_name (params) {
+
+			}
+		}
+
+2. Supplying the initialState
+	- Them vao tham so thu 2 cua ham createStore.
+
+3. Persisting the State to the LocalStorage.
+	- localStorage.setItem(key, value), localStorage.getItem(key) de get, set localstorage.
+	- cung cap no o tham so thu 2 cua createStore(reducer, persistenData).
+	- Su dung thottle trong lodash/thottle de giam viec su dung ham JSON.stringify trong setState.
+	- Su dung v4() trong node-uuid de tranh viec trung lap ID.
+
+4. Refactoring the Entry Point.
+	- Tao Root Component.
+	- Tach viec configureStore ra khoi index.js
+
+5. Adding ReactRouter
+6. Navigating with <Link>
+7. Filtering Redux State with ReactRouter params.
+8. Using withRouter() to Inject the Params into Connected Components.
+	- Trong Root Component them vao ReactRouter.
+	<Provider>
+		<Router history={browserHistory}>
+			<Route path='/(:filter)' component={App}/>	day la cach them param va de trong dau () la optional
+		</Router>
+	</Provider>
+	- FilterLink
+	<Link 
+		to={filter==='all'?'':filter}
+		activeStyle={{textDecoration: 'none', color: 'black'}}
+	>
+		{children}
+	</Link>
+	- VisibileTodoList
+	const mapStateToProps = (state, {params}) => {
+		todos: getVisibleTodos(state.todos, params.filter || 'all')
+	}
+	...
+	const VisibleTodoList = withRouter(connect(mapStateToProps, mapDispatchToProps)(TodoList));
+
+9. Using mapDispatchToProps() shorthand notation.
+	Nếu arg của callback function và action creator giống nhau. => có thể viết dạng ngắn gọn của mapDispatchToProps như sau:
+	const VisibleTodoList = withRouter(connect(
+	  mapStateToProps,
+	  { onTodoClick: toggleTodo }
+	)(TodoList));
+	
+10. Colocating Selectors with Reducers
+	doc phan 5 o phia tren cung.
+
+11. Normalizing the State Shape.
+	Problem of todoApp.
+		We probably have more than a single array and then todos with the same IDs in different arrays might get out of sync.
+	Solution.
+		Treat my state as a database.
