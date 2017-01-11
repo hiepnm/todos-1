@@ -176,3 +176,10 @@ Review Build ReactApp with Redux.
 		We probably have more than a single array and then todos with the same IDs in different arrays might get out of sync.
 	Solution.
 		Treat my state as a database.
+
+	Mixing the objects spread operator (not ES6) with the computed property syntax
+	All the state shape knowledge is encapsulated in the selector.
+
+
+
+
