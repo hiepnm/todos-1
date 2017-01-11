@@ -203,8 +203,10 @@ Review Build ReactApp with Redux.
 	}
 	...
 
-
-	
+13. Adding a Fake Backend to the Project
+We will learn about fake backend module that we will be using throughout the next lessons to simulate data fetching.
+	- See src/api/index.js
+	- This approach lets us explore how Redux works with asynchronous data fetching without writing a real backend for the app.
 
 
 
