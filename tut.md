@@ -220,6 +220,32 @@ We want the fetched todos to become a part of the Redux Store state. The only wa
 I'm going to call the callback prop called receiveTodos, whether to todos I just fetched.
 To make it available inside the component, I need to pass a function called receiveTodos that would be an action creator inside the second argument of connect function.
 
+16.Wrapping dispatch() to Recognize Promises
+We will learn how to teach dispatch() to recognize Promises so that we can move the async logic out of the components into asynchronous action creators.
+Muc dich la group this code (phan code fetchTodos va receiveTodos trong VisibleTodoList) into a single action creator.
+Muc dich2: move the async logic out of the components into asynchronous action creators.
+sua actions/index.js
+	const receiveTodos = (filter, response) => ({
+		type: 'RECEIVE_TODOS',
+		filter,
+		response,
+	});
+
+	export const fetchTodos = (filter) => 
+		api.fetchTodos(filter).then(response => 
+			receiveTodos(filter, response)
+		);
+sua VisibleTodoList.js
+	fetchData() {
+		const {filter, fetchTodos} = this.props;
+		fetchTodos(filter);
+	}
+Sua 1 hoi bi sai vi: Redux only allows dispatch in plain objects rather than promises.
+Sua nhu sau: We can teach it to recognize promises by using the same trick that we use for addLoggingToDispatch.
+	addLoggingToDispatch is the function we wrote before that creates the dispatch from the store and returns a new version of dispatch that logs every action and the state.
+	In a similar fashion, I can create a function called addPromiseSupportToDispatch that takes the store and returns a version of dispatch that supports promises.
+	check if it has a .then method that is a function, which is a way to tell if something is a promise.
+	
 
 
 
