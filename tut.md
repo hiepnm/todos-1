@@ -246,7 +246,26 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	In a similar fashion, I can create a function called addPromiseSupportToDispatch that takes the store and returns a version of dispatch that supports promises.
 	check if it has a .then method that is a function, which is a way to tell if something is a promise.
 	
-
+17. The Middleware Chain.
+	We will learn how we can generalize wrapping dispatch() for different purposes into a concept called “middleware” that is widely available in the Redux ecosystem.
+	Middleware can serve very different purposes. It might add some useful debugging information, such as the case with login middleware, or it might amend dispatch to understand something other than plain actions, which is the case with the promise middleware.
+	Middleware is a powerful system that lets us put custom behavior before action reaches the reducers.
+	addPromiseSupportToDispatch returns acts like a normal dispatch function, but if it gets a promise, it waits for this promise to resolve and passes the result to rawDispatch, where rawDispatch is the previous value of store.dispatch. For non-promises, it calls rawDispatch right away.
+	...
+	=> we might want to override dispatch function before adding the logging.
+	work, but it's not really great at re-override the public API and replace it with custom functions.
+	To get away from this pattern, I am declaring an array of what I'm calling middlewares functions, which is just a fancy name I use for these functions I wrote,
+		const middlewares = [];
+		middlewares.push(addLoggingToDispatch);	
+		middlewares.push(addPromiseSupportToDispatch);
+	Write a separate function that applies the middlewares.
+		middlewares.forEach(middleware=>store.dispatch = middleware(store))
+	Refactor middleware function.
+		there is a certain pattern that I have to repeat. I'm grabbing the value of store.dispatch, and I'm storing it in a variable called next so that I can call it later.
+		To make it a part of the middleware contract, I can make next an outside argument, just like the store before it and the action after it.
+	Sap xep middleware theo order cua action. 
+		it would be more natural to specify the order in which the action propagates through the middlewares.
+		This is why I'm changing my middleware declaration to specify them in the order in which the action travels through them.
 
 
 
