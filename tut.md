@@ -302,7 +302,11 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 
 		Since I also moved the byId reducer into a separate file, I also don't want to make an assumption that it's just a lookup table, and I will use fromById.getTodo selector that it exports and pass its state and the corresponding id. This lets me change the state shape of any reducer in the future without rippling changes across the code base.
 
-
+21. Displaying Loading Indicators
+	=> create a action creator name requestTodos => dispatch it in the component before fetchTodo. type action is REQUEST_TODO.
+	Modify the state shape of the list => an object that contains this array as a property. => and add a selector to select ids array and this properties. 
+	=> this property (isFetching) viet thanh 1 reducer, nhan aciton REQUEST_TODO return true, nhan action RECEIVE_TODO return false.
+	
 
 
 QUESTION:
