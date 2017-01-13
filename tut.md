@@ -272,11 +272,27 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	and third party utilities: redux-logger, redux-promise.
 		The applyMiddleware returns something called an enhancer. This is the optional last argument to create store. If you want to also supply the persistentState, you need to do this before the enhancer.
 
-
+19. Updating the State with the Fetched Data.
+	We will learn how moving the "source of truth" for the data to the server changes the state shape and the reducers in our app.
+	See reducers/todos.js to see problem
+		If we have thousands of todos on the server, it would be impractical to fetch them all and filter them on the client.
+		Solution:
+			Rather than keep a big list of IDs, we'll keep a list of IDs for every tab so that they can be stored separately and filled according with the actions with the fetch data on the corresponding tab.
+	Hieu duoc bai nay phai 
+	xem lai 1 chuoi bai truoc do.
+		video ve inject store.getState su dung Provider (hay context), tao thanh tu mapStateToProps tu khoa hoc truoc.
+		video 9 dispatch shorthand.
+		video 16 ve promise: Wraping dispatch to recognize Promise.
+	hieu duoc co che promise khi dispatch roi render lai. 
+		render => ComponentDidMount => dispatch(fetchTodo) => fetchTodo => response => receiveTodos => dispatch(receiveTodo) => update state in store => update Component.
+		
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
-
+single source of truth la gi?
+=> doc bai Form trong react quickstart.
+=> xem tren wiki.
+In information systems design and theory, single source of truth (SSOT), is the practice of structuring information models and associated schemata such that every data element is stored exactly once (e.g., in no more than a single row of a single table). 
 
 
 
