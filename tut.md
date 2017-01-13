@@ -286,6 +286,24 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	hieu duoc co che promise khi dispatch roi render lai. 
 		render => ComponentDidMount => dispatch(fetchTodo) => fetchTodo => response => receiveTodos => dispatch(receiveTodo) => update state in store => update Component.
 		
+20. Refactoring the Reducers
+	We will learn how to remove the duplication in our reducer files and how to keep the knowledge about the state shape colocated with the newly extracted reducers.
+	Tóm lại ở đây, tách ra các reducer và export 1 vài selector. Mục đích của selector thì rõ ràng là để việc thay đổi code về sau, chỉ xảy ra ở module chứa selector đó. Nếu không dùng selector thì sao, thì mai sau thay đổi code base thì phải thay đổi khá nhiều chỗ. Ví dụ trong index.js hoàn toàn có thể sử dụng.
+		export const getVisibleTodos = (state, filter) => {
+			const ids = fromList.getIds(state.listByFilter[filter]);
+			return ids.map(id => state.byId[id]);	//tôi muốn nhắc đến dòng này. nhưng phải thay đổi để dùng selector của byId.
+		};
+
+		//như sau.
+		export const getVisibleTodos = (state, filter) => {
+			const ids = fromList.getIds(state.listByFilter[filter]);
+			return ids.map(id => fromById.getTodo(state.byId, id));	//dùng selector như này.
+		};
+
+		Since I also moved the byId reducer into a separate file, I also don't want to make an assumption that it's just a lookup table, and I will use fromById.getTodo selector that it exports and pass its state and the corresponding id. This lets me change the state shape of any reducer in the future without rippling changes across the code base.
+
+
+
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
