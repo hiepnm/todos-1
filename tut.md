@@ -307,7 +307,16 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	Modify the state shape of the list => an object that contains this array as a property. => and add a selector to select ids array and this properties. 
 	=> this property (isFetching) viet thanh 1 reducer, nhan aciton REQUEST_TODO return true, nhan action RECEIVE_TODO return false.
 	
+22. Dispatching Actions Asynchronously with Thunks 
+	We will learn about “thunks”—the most common way to write async action creators in Redux.
+	How thunk middleware lets us dispatch multiple actions asynchronously.
+	Muc dich cua video:
+		It would be great if I could make requestTodos dispatched automatically when I fetch the todos because I never want to fire them separately.
+	An action promise resolves through a single action at the end, but we want an abstraction that represents multiple actions dispatched over the period of time.
+	This is why rather than return a promise, I want to return a function that accepts a dispatch callback argument.
+	This lets me call dispatch as many times as I like at any point of time during the async operation.
 
+	Such functions returned from other functions are often called thunks
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
