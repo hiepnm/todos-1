@@ -252,7 +252,7 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	Middleware is a powerful system that lets us put custom behavior before action reaches the reducers.
 	addPromiseSupportToDispatch returns acts like a normal dispatch function, but if it gets a promise, it waits for this promise to resolve and passes the result to rawDispatch, where rawDispatch is the previous value of store.dispatch. For non-promises, it calls rawDispatch right away.
 	...
-	=> we might want to override dispatch function before adding the logging.
+	=> we might want to override dispatch function before adding the logger.
 	work, but it's not really great at re-override the public API and replace it with custom functions.
 	To get away from this pattern, I am declaring an array of what I'm calling middlewares functions, which is just a fancy name I use for these functions I wrote,
 		const middlewares = [];
@@ -267,7 +267,15 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 		it would be more natural to specify the order in which the action propagates through the middlewares.
 		This is why I'm changing my middleware declaration to specify them in the order in which the action travels through them.
 
+18. Applying Redux Middleware
+	using the existing core: applyMiddleware 
+	and third party utilities: redux-logger, redux-promise.
+		The applyMiddleware returns something called an enhancer. This is the optional last argument to create store. If you want to also supply the persistentState, you need to do this before the enhancer.
 
+
+
+QUESTION:
+Tim hieu thu tu dat middleware trong redux app.
 
 
 
