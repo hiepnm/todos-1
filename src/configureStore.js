@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 const thunk = (store) => (next) => (action) => 
 	typeof action === 'function' ? 
-		action(next) : 
+		action(store.dispatch, store.getState) : 
 		next(action);
 
 const configureStore = () => {

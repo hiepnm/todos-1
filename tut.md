@@ -335,6 +335,30 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	Da hieu tai sao dat la next. Vi theo chieu goi function store.dispatch thi thunk -> logger -> raw. Nhu vay logger la next cua thunk. raw la next cua logger.
 	=> mang middlewares cung sep theo thu tu cua chain nay (chieu goi dispatch)
 
+23. Avoiding Race Conditions with Thunks
+	We will learn how Redux Thunk middleware lets us conditionally dispatch actions to avoid unnecessary network requests and potential race conditions.
+	
+	Problem:
+		I'm increasing the delay in my fake API client to five seconds. This lets me notice a problem.
+		We don't check if the tab is already loading before starting a request, and then a bunch of RECEIVE_TODOS action comes back, potentially resulting in a race condition.
+		Tại sao a bunch of RECEIVE_TODOS action come back lai co kha nang gay ra race condition?
+		race condition la gi?
+	Solution:
+		Inject getState from store, pass store.getState to thunk in thunk middleware. Now thunk(dispatch, getState)
+		Check isFetching in thunk, to avoid requestTodos too multiple times.
+			export const fetchTodos = (filter) => (dispatch, getState) => {
+				if (getIsFetching(getState(), filter)) {
+					return;
+			  }
+			  ... //dispatch in period times
+		  }
+	Sumary:
+		This is a good way to avoid unnecessary network operations and potential race conditions.
+
+
+
+
+
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
 single source of truth la gi?
