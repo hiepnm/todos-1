@@ -315,8 +315,25 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	An action promise resolves through a single action at the end, but we want an abstraction that represents multiple actions dispatched over the period of time.
 	This is why rather than return a promise, I want to return a function that accepts a dispatch callback argument.
 	This lets me call dispatch as many times as I like at any point of time during the async operation.
+	change 
+	export const fetchTodos = (filter) => 
+		api.fetchTodos(filter).then(response => 
+			receiveTodos(filter, response))
+	to
+	export const fetchTodos = (filter) => (dispatch) => {
+		dispatch(requestTodos(filter));
 
-	Such functions returned from other functions are often called thunks
+		return api.fetchTodos(filter).then(response => {
+			dispatch(receiveTodos(filter, response));
+		});
+	}
+		This means more typing than returning a promise, but it also gives me more flexibility. A promise can only express one async value, so fetchTodos now returns a function with a callback argument so that it can call it multiple times during the async operation.
+	Such functions returned from other functions are often called thunks, so we're going to implement a thunk middleware to support them.
+	Bay gio hieu nhu nay. action la function thi no la thunk.
+	When we see an action that is really a function, a thunk, we call it with store.dispatch as an argument so that it can dispatch other actions by itself. 
+	No matter what gets dispatched, it will go through the middleware chain again, and if its type is a function, it will be called like a thunk, but otherwise, it will be passed on to the next middleware in chain.
+	Da hieu tai sao dat la next. Vi theo chieu goi function store.dispatch thi thunk -> logger -> raw. Nhu vay logger la next cua thunk. raw la next cua logger.
+	=> mang middlewares cung sep theo thu tu cua chain nay (chieu goi dispatch)
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
