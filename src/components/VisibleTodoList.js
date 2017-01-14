@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import TodoList from './TodoList';
 import {withRouter} from 'react-router';
-import {getVisibleTodos, getIsFetching} from '../reducers';
+import {getVisibleTodos, getErrorMessage, getIsFetching} from '../reducers';
+import FetchError from './FetchError';
 
 class VisibleTodoList extends Component {
 	componentDidMount() {
@@ -19,9 +20,17 @@ class VisibleTodoList extends Component {
 			.then(()=>console.log("done!"));	//schedule some code after the asynchronous action has completed
 	}
 	render() {
-		const {toggleTodo, todos, isFetching} = this.props;
+		const {toggleTodo, errorMessage, todos, isFetching} = this.props;
 		if (isFetching && !todos.length) {
 			return <p>Loading...</p>;
+		}
+		if (errorMessage && !todos.length) {
+			return (
+				<FetchError 
+					message={errorMessage}
+					onRetry={()=>this.fetchData()}
+				/>
+			);
 		}
 		return (
 			<TodoList 
@@ -32,10 +41,19 @@ class VisibleTodoList extends Component {
 	}
 }
 
+VisibleTodoList.propTypes = {
+	filter: PropTypes.oneOf(["all", "active", "completed"]).isRequired,
+	todos: PropTypes.array.isRequired,
+	isFetching: PropTypes.bool.isRequired,
+	fetchTodos: PropTypes.func.isRequired,
+	toggleTodo: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state, {params}) => {
 	const filter = params.filter || 'all';
 	return {
 		todos: getVisibleTodos(state, filter),
+		errorMessage: getErrorMessage(state, filter),
 		isFetching: getIsFetching(state, filter),
 		filter,
 	}

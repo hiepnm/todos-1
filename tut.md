@@ -366,7 +366,23 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 		npm install --save redux-thunk
 		Use redux-thunk to dispatch actions asynchronously and conditionally.
 
-
+24.  Displaying Error Messages
+	We will learn how to handle an error inside an async action, display its message in the user interface, and offer user an opportunity to retry the action.
+	The second argument to promise.then method, the rejection handler.
+		=> dispatch error in it.
+	Another way using:
+		PromiseFunc
+			.then(response => {
+				...
+			})
+			.catch(error => {
+				...
+			})
+		The downside of this approach is if one of your reducers or subscribe components throws while handling this action you'll get into the catch block and so you'll display an internal error message to the user.
+		To avoid this error, I recommend that you don't use catch in this scenario and just pass the second argument so it catches only the errors from the underlying API promise. The error object usually comes with a message that we can wrap or display directly to the user with a fallback.
+	Handle it in reducer.
+	Display:
+		
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
