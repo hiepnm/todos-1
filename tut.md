@@ -383,6 +383,15 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	Handle it in reducer.
 	Display:
 		
+25. Creating Data on the Server
+	We will learn how to wait until the item is created on the server, and update the corresponding local state.
+	1, addTodo in fakeDatabase
+	2, action creator addTodo -> thunk to get data async.
+	3, update reducers.
+		Using ... object spread operator and [] to create new in byId reducer.
+
+
+		
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
@@ -390,6 +399,9 @@ single source of truth la gi?
 => doc bai Form trong react quickstart.
 => xem tren wiki.
 In information systems design and theory, single source of truth (SSOT), is the practice of structuring information models and associated schemata such that every data element is stored exactly once (e.g., in no more than a single row of a single table). 
+
+NOTE.
+Ham createList rat ky dieu. Thuc ra moi action deu chay qua ham nay, nen check filter cho can than.
 
 
 
