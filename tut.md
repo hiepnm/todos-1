@@ -390,8 +390,32 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 	3, update reducers.
 		Using ... object spread operator and [] to create new in byId reducer.
 
+26. Normalizing API Responses with normalizr
+	We will learn how to use normalizr to convert all API responses to a normalized format so that we can simplify the reducers.
+	Problem:
+		FETCH_TODOS_SUCCESS response array of todo elements.
+ 		ADD_TODO_SUCCESS response a todo element
+		=> response shape different => handle different way.
+			Instead of adding new cases for every new API call, 
+			I want to normalize the responses so the response shape is always the same.
+	solution:
+		1, install
+			npm install -save normalizr
+			A utility library that helps me normalize API responses to have the same shape.
+		2, code
+			create schema.js
+			import Schema constructor, and arrayOf function.
+			export const todo = new Schema('todos'); 
+				todo object with normalized format.
+				"todos" is the name of the dictionary in the normalized response
+			export const arrayOfTodos = arrayOf(todo);
+				the responses that contain arrays of todo objects.
+		3, result:
+			It contains two fields called entities and result. 
+				Entities contains a normalized dictionary called todos that contains every todo in the response by its id. Normalizr found these todo objects in the response by following the array of todos schema. Conveniently, they are indexed by ids, so they will be easy to merge into the lookup table.
+				The second field is the result. It's an array of todo ids. They are in the same order as the todos in the original response array. However, Normalizr replaced each todo with its id, and moved every todo into the todos dictionary.
+			Normalizr can do this for any API response shape.
 
-		
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
