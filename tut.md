@@ -354,8 +354,17 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 		  }
 	Sumary:
 		This is a good way to avoid unnecessary network operations and potential race conditions.
-
-
+	
+	Note:
+		Look the return of the thunk. 
+			It returns a promise. It doesn't have to, but it's convenient for the calling code.
+		The thunk middleware itself does not use this promise.
+			but it becomes the return value of dispatching this action creator, 
+			so I can use it inside the component to schedule some code after the asynchronous action has completed.
+	
+	redux-thunk:
+		npm install --save redux-thunk
+		Use redux-thunk to dispatch actions asynchronously and conditionally.
 
 
 

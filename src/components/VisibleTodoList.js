@@ -15,7 +15,8 @@ class VisibleTodoList extends Component {
 	}
 	fetchData() {
 		const {filter, fetchTodos} = this.props;
-		fetchTodos(filter);
+		fetchTodos(filter)
+			.then(()=>console.log("done!"));	//schedule some code after the asynchronous action has completed
 	}
 	render() {
 		const {toggleTodo, todos, isFetching} = this.props;
