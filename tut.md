@@ -397,7 +397,7 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
  		ADD_TODO_SUCCESS response a todo element
 		=> response shape different => handle different way.
 			Instead of adding new cases for every new API call, 
-			I want to normalize the responses so the response shape is always the same.
+	=> I want to normalize the responses so the response shape is always the same.
 	solution:
 		1, install
 			npm install -save normalizr
@@ -416,6 +416,14 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 				The second field is the result. It's an array of todo ids. They are in the same order as the todos in the original response array. However, Normalizr replaced each todo with its id, and moved every todo into the todos dictionary.
 			Normalizr can do this for any API response shape.
 
+			Tom lai neu khai bao nhu tren (muc 2, code) thi ket qua tra ve se la 1 dictionary (entities), va 1 array of ids de lookup (result)
+		4, sua reducer:
+			using ... to merge.
+		NOTE:
+			The name of the dictionary inside entities corresponds to the string argument that I passed to the schema constructor when I created the todo schema.
+			Version trong video la 2.1.0, rat khac so voi current version. => phai tim cach su dung version hien tai de co response shape hop ly.
+
+
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
@@ -429,7 +437,10 @@ Ham createList rat ky dieu. Thuc ra moi action deu chay qua ham nay, nen check f
 
 
 
-
+normalizr
+Introduction: https://github.com/paularmstrong/normalizr/blob/master/docs/introduction.md 
+Quickstart: https://github.com/paularmstrong/normalizr/blob/master/docs/quickstart.md
+API: https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#normalizedata-schema
 
 
 
