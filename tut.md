@@ -423,7 +423,12 @@ Sua nhu sau: We can teach it to recognize promises by using the same trick that 
 			The name of the dictionary inside entities corresponds to the string argument that I passed to the schema constructor when I created the todo schema.
 			Version trong video la 2.1.0, rat khac so voi current version. => phai tim cach su dung version hien tai de co response shape hop ly.
 
-
+27. Updating Data on the Server
+We will learn how to wait until the item is updated on the server, and then update the corresponding local state.
+Bai hoc rut ra. 
+	=> Gui Update len server, 
+	va chi update local o cho user hien thi, khong update local o cho ko hien thi, 
+	neu chuyen sang cho khong hien thi => fetch lai tu server.
 
 QUESTION:
 Tim hieu thu tu dat middleware trong redux app.
