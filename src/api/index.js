@@ -22,7 +22,7 @@ const fakeDatabase = {
 const delay = (ms) => 
 	new Promise(resolve => setTimeout(resolve, ms));
 
-export const fetchTodos = (filter) => 
+exports.fetchTodos = (filter) => 
 	delay(500).then(
 		() => {
 			// if (Math.random() > 0.5) {
@@ -42,7 +42,7 @@ export const fetchTodos = (filter) =>
 		}
 	);
 
-export const addTodo = (text) => 
+exports.addTodo = (text) => 
 	delay(500).then(
 		() => {
 			const todo = {
@@ -55,7 +55,7 @@ export const addTodo = (text) =>
 		}
 	);
 
-export const toggleTodo = (id) =>
+exports.toggleTodo = (id) =>
 	delay(500).then(
 		() => {
 			const todo = fakeDatabase.todos.find(t => t.id === id);

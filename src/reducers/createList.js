@@ -64,6 +64,6 @@ const createList = (filter) => {
 
 export default createList;
 
-export const getIds = (state) => state.ids;
-export const getIsFetching = (state) => state.isFetching;
-export const getErrorMessage = (state) => state.errorMessage;
+exports.getIds = (state) => state.ids;
+exports.getIsFetching = (state) => state.isFetching;
+exports.getErrorMessage = (state) => state.errorMessage;
