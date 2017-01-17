@@ -36,7 +36,6 @@ const createList = (filter) => {
 			case 'FETCH_TODOS_REQUEST':
 				return true;
 			case 'FETCH_TODOS_SUCCESS':
-			case 'FETCH_TODOS_FAILURE':
 				return false;
 			default:
 				return state;
